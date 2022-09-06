@@ -7,8 +7,13 @@ class schoolSystem
 {
 public:
 	void run();
-	void addStudent();
-	void removeStudent();
+	void addStudent(std::string name, int age);
+	void removeStudent(); 
+	void menu();
+	void createAccount();
+	void login();
+
+
 
 
 	std::vector<student> students;
@@ -17,5 +22,5 @@ public:
 
 
 private:
-
+	bool runSystem = true;
 };
