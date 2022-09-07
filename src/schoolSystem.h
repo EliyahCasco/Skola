@@ -12,12 +12,17 @@ public:
 	void menu();
 	void createAccount();
 	void login();
+	void quit();
 
 
 
 
 	std::vector<student> students;
 	std::vector<std::string> schoolClasses;
+
+	std::vector<std::string> usernames;
+	std::vector<std::string> password;
+
 
 
 
