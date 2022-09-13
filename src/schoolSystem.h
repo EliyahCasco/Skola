@@ -21,7 +21,7 @@ public:
 	std::vector<std::string> schoolClasses;
 
 	std::vector<std::string> usernames;
-	std::vector<std::string> password;
+	std::vector<std::string> passwords;
 
 
 

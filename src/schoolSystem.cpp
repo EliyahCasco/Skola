@@ -3,9 +3,6 @@
 
 void schoolSystem::run()
 {
-	
-
-
 	int counter = 0;
 	while (runSystem)
 	{
@@ -16,7 +13,6 @@ void schoolSystem::run()
 		if (!runSystem) break;
 		std::cin.get();
 	}
-
 }
 
 void schoolSystem::addStudent(std::string name, int age)
@@ -65,7 +61,7 @@ void schoolSystem::createAccount()
 	std::string username = "";
 	std::cin >> username; 
 
-	for (auto i : usernames)
+	for (auto i : usernames)	
 	{
 
 		if (i == username)
@@ -82,7 +78,7 @@ void schoolSystem::createAccount()
 	std::string password = "";
 	std::cin >> password;
 
-	usernames.push_back(password);
+	passwords.push_back(password);
 
 	std::cout << "Congratulations you made an account\nDo you want to\n1. Go to menyu\n2. Log in\n3. Quit\n";
 	int accountCreateAnswer = 0;
@@ -112,20 +108,33 @@ void schoolSystem::login()
 	{
 		std::cout << "Write your username\n";
 		std::string loginName = "";
+		std::string loginPass = " ";
 		std::cin >> loginName;
 
-		for (auto i : usernames)
+		for (size_t i = 0; i < usernames.size(); i++)
 		{
-			if (i == loginName)
+			if (usernames[i] == loginName)
 			{
-				std::cout << "Please write your password";
+				std::cout << "Please write your password\n";
+				std::cin >> loginPass;
+				if (passwords[i] == loginPass)
+				{
+					std::cout << "You are logged in!";
+				}
+				else
+				{
+					std::cout << "The password is incorect please try again\n";
+					login();
+				}
 			}
 			else
 			{
 				std::cout << "The username you're trying to use doesn't exist please try again\n";
+				login();
 				
 			}
 		}
+		
 	}
 	else
 	{
