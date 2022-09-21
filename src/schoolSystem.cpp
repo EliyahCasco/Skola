@@ -6,8 +6,8 @@ void schoolSystem::run()
 	int counter = 0;
 	while (runSystem)
 	{
-		menu();
-
+		//menu();
+		studentMenu();
 		std::cout << "Loop: " << counter << "\n";
 		counter++;
 		if (!runSystem) break;
@@ -18,13 +18,41 @@ void schoolSystem::run()
 void schoolSystem::addStudent(std::string name, int age)
 {
 	student student;
-	student.name = "name";
+	student.name = name;
 	student.age = age;
 	students.push_back(student);
 }
 
 void schoolSystem::removeStudent()
 {
+	std::string studentDelete = "";
+	std::cout << "Write in the name of the student you want to remove\n";
+	std::cin >> studentDelete;
+	if (students.size() == 0) 
+	{
+		std::cout << "There are no students to remove please try again";
+		studentMenu();
+	}
+
+	for (size_t i = 0; i < students.size(); i++) 
+	{
+		for (auto x : students) 
+		{
+			if (x.name == studentDelete) 
+			{
+				students.erase(std::begin(students) + i);
+				std::cout << "Removed student " << x.name << "\nList of students:\n ";
+				for (auto k : students) {
+					std::cout << k.name << ", ";
+				}
+			}
+			else
+			{
+				std::cout << "The name you are trying to remove doesn't exist";
+			}
+		}
+	}
+
 }
 
 void schoolSystem::menu()
@@ -47,7 +75,6 @@ void schoolSystem::menu()
 	default:
 		
 		break;
-
 	}
     
 	
@@ -95,11 +122,9 @@ void schoolSystem::createAccount()
 		quit();
 		break;
 	default:
+
 		break;
 	}
-
-
-
 }
 
 void schoolSystem::login()
@@ -120,6 +145,7 @@ void schoolSystem::login()
 				if (passwords[i] == loginPass)
 				{
 					std::cout << "You are logged in!";
+					
 				}
 				else
 				{
@@ -131,21 +157,56 @@ void schoolSystem::login()
 			{
 				std::cout << "The username you're trying to use doesn't exist please try again\n";
 				login();
-				
 			}
 		}
-		
 	}
 	else
 	{
 		std::cout << "There are no accounts registered please create one\n";
 		createAccount();
 	}
-
 }
 
 void schoolSystem::quit()
 {
 	std::cout << "Goodbye!";
 	runSystem = false;
+}
+
+void schoolSystem::studentMenu()
+{
+	int studentAnswer = 0;
+	int studentAge = 0;
+	std::string studentName = "";
+	std::cout << "HELLAW AND WELCOME TO STUDENT THING THING\n";
+	std::cout << "Do you want to\n1 Add student\n2 remove student\n3 Add class\n4 Add student to class\n5 remove student from class\n6 info about classes\n7 quit.\n";
+	std::cin >> studentAnswer;
+	switch (studentAnswer)
+	{
+	case 1:
+		std::cout << "what is the name of the student?\n";
+		std::cin >> studentName;
+		std::cout << "What is the age of your student\n";
+		std::cin >> studentAge;
+		addStudent(studentName, studentAge);
+		break;
+	case 2:
+		removeStudent();
+		break;
+	case 3:
+		
+		break;
+	default:
+
+		break;
+	}
+
+}
+
+void schoolSystem::addClass()
+{
+}
+
+void schoolSystem::addStudentToClass()
+{
 }

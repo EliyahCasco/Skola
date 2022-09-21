@@ -13,9 +13,9 @@ public:
 	void createAccount();
 	void login();
 	void quit();
-
-
-
+	void studentMenu();
+	void addClass();
+	void addStudentToClass();
 
 	std::vector<student> students;
 	std::vector<std::string> schoolClasses;
