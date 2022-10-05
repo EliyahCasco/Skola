@@ -22,34 +22,21 @@ void schoolSystem::addStudent(std::string name, int age)
 
 void schoolSystem::removeStudent()
 {
-	std::string studentDelete = "";
-	std::cout << "Write in the name of the student you want to remove\n";
-	std::cin >> studentDelete;
-	if (students.size() == 0) 
+	std::string deletStudent = "";
+	std::cout << "What is the name of the student you want to remove?\n";
+	std::cin >> deletStudent;
+	std::vector<student> newStudents;
+	for (auto x : students)
 	{
-		std::cout << "There are no students to remove please try again";
-		studentMenu();
-	}
-
-	for (size_t i = 0; i < students.size(); i++) 
-	{
-		for (auto x : students) 
+		if (x.name != deletStudent)
 		{
-			if (x.name == studentDelete) 
-			{
-				students.erase(std::begin(students) + i);
-				std::cout << "Removed student " << x.name << "\nList of students:\n ";
-				for (auto k : students) {
-					std::cout << k.name << ", ";
-				}
-			}
-			else
-			{
-				std::cout << "The name you are trying to remove doesn't exist";
-			}
+			newStudents.push_back(x);
+		}
+		else {
+			std::cout << "You removed " << x.name << "\n";
 		}
 	}
-	studentMenu();
+	students = newStudents;
 }
 
 void schoolSystem::menu()
@@ -310,19 +297,24 @@ void schoolSystem::info()
 
 void schoolSystem::removeStudentFromClass()
 {
-	std::string studentToDelete = "";
-	std::string klassToDelete = "";
-
+	std::string deletStudent = "";
 	std::cout << "What is the name of the student you want to remove?\n";
-	std::cin >> studentToDelete;
-
-	int i = 0;
+	std::cin >> deletStudent;
+	std::vector<student> newStudents;
+	student stud;
 	for (auto x : students)
 	{
-		if (x.name == studentToDelete)
+		if (x.name != deletStudent)
 		{
-			
+			newStudents.push_back(x);
+		}
+		else {
+			stud = x;
+			std::cout << "You removed " << x.name << " from the class:\n" << x.klass << "\n";
 		}
 	}
+	students = newStudents;
+	stud.klass = "";
+	students.push_back(stud);
 
 }
