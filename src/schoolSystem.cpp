@@ -6,10 +6,7 @@ void schoolSystem::run()
 	int counter = 0;
 	while (runSystem)
 	{
-		//menu();
-		studentMenu();
-		std::cout << "Loop: " << counter << "\n";
-		counter++;
+		menu();
 		if (!runSystem) break;
 		std::cin.get();
 	}
@@ -52,7 +49,7 @@ void schoolSystem::removeStudent()
 			}
 		}
 	}
-
+	studentMenu();
 }
 
 void schoolSystem::menu()
@@ -144,8 +141,8 @@ void schoolSystem::login()
 				std::cin >> loginPass;
 				if (passwords[i] == loginPass)
 				{
-					std::cout << "You are logged in!";
-					
+					std::cout << "You are logged in!\n";
+					studentMenu();
 				}
 				else
 				{
@@ -163,7 +160,7 @@ void schoolSystem::login()
 	else
 	{
 		std::cout << "There are no accounts registered please create one\n";
-		createAccount();
+createAccount();
 	}
 }
 
@@ -178,6 +175,7 @@ void schoolSystem::studentMenu()
 	int studentAnswer = 0;
 	int studentAge = 0;
 	std::string studentName = "";
+	std::string klassName = "";
 	std::cout << "HELLAW AND WELCOME TO STUDENT THING THING\n";
 	std::cout << "Do you want to\n1 Add student\n2 remove student\n3 Add class\n4 Add student to class\n5 remove student from class\n6 info about classes\n7 quit.\n";
 	std::cin >> studentAnswer;
@@ -189,12 +187,28 @@ void schoolSystem::studentMenu()
 		std::cout << "What is the age of your student\n";
 		std::cin >> studentAge;
 		addStudent(studentName, studentAge);
+		studentMenu();
 		break;
 	case 2:
 		removeStudent();
 		break;
 	case 3:
-		
+		std::cout << "What is the namne of the class u want to add\n";
+		std::cin >> klassName;
+		addClass(klassName);
+		studentMenu();
+		break;
+	case 4:
+		addStudentToClass();
+		break;
+	case 5:
+
+		break;
+	case 6:
+		info();
+		break;
+	case 7:
+		quit();
 		break;
 	default:
 
@@ -203,10 +217,112 @@ void schoolSystem::studentMenu()
 
 }
 
-void schoolSystem::addClass()
+void schoolSystem::addClass(std::string klassNamn)
 {
+	student student;
+	student.klass = klassNamn;
+	students.push_back(student);
 }
 
 void schoolSystem::addStudentToClass()
 {
+	std::string studentName = "";
+	std::string skolKlass = "";
+	std::cout << "What is the name of the student?\n";
+	std::cin >> studentName;
+	std::cout << "What class does ur student go in?\n";
+	std::cin >> skolKlass;
+
+	for (auto& classes : schoolClasses)
+	{
+		if (classes != skolKlass)
+		{
+			std::cout << "No classes exist please try again!\n";
+			studentMenu();
+		}
+	}
+
+	for (auto& student : students)
+	{
+		if (student.name == studentName)student.klass = skolKlass;
+	}
+	studentMenu();
+}
+
+void schoolSystem::info()
+{
+	int infoAnswer = 0;
+	std::cout << "What info do you want to know?\n1. All students\n2. All classes?\n3. Everything\n4. info about single student\n5. Info about a single class\n";
+	std::cin >> infoAnswer;
+	std::string answerStudent = "";
+	switch (infoAnswer)
+	{
+	case 1:
+		std::cout << "All students: \n";
+		for (auto i : students)
+		{
+			std::cout << i.name << ", " << i.age << ", \n";
+        }
+		break;
+    case 2:
+		std::cout << "All classes\n";
+		for (auto k : students)
+		{
+			std::cout << k.klass << ", \n";
+		}
+		break;
+	case 3:
+		std::cout << "all info\n";
+		for (auto q : students)
+		{
+			std::cout << q.name << ", " << q.age << ", " << q.klass << ", \n";
+		}
+		break;
+	case 4:
+		std::cout << "What is the name of the student?\n";
+		std::cin >> answerStudent;
+		for (auto k : students)
+		{
+			if (answerStudent == k.name)
+			{
+				std::cout << "Age: " << k.age << ", Name: " << k.name << ", Class: " << k.klass << "\n";
+			}
+		}
+		break;
+	case 5:
+		std::cout << "What is the name of the class?\n";
+		std::cin >> answerStudent;
+		std::cout << "THe person's in the class are: \n";
+		for (auto k : students)
+		{
+			if (answerStudent == k.klass)
+			{
+				std::cout << k.name << ", ";
+			}
+		}
+		std::cout << "\n";
+		break;
+		break;
+	default:
+		break;
+	}
+}
+
+void schoolSystem::removeStudentFromClass()
+{
+	std::string studentToDelete = "";
+	std::string klassToDelete = "";
+
+	std::cout << "What is the name of the student you want to remove?\n";
+	std::cin >> studentToDelete;
+
+	int i = 0;
+	for (auto x : students)
+	{
+		if (x.name == studentToDelete)
+		{
+			
+		}
+	}
+
 }

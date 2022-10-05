@@ -14,8 +14,11 @@ public:
 	void login();
 	void quit();
 	void studentMenu();
-	void addClass();
+	void addClass(std::string klassNamn);
 	void addStudentToClass();
+	void info();
+	void removeStudentFromClass();
+
 
 	std::vector<student> students;
 	std::vector<std::string> schoolClasses;
